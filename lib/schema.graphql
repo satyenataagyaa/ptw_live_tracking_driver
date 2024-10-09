@@ -1,0 +1,23 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Location {
+  latitude: Float!
+  longitude: Float!
+  tripId: String!
+}
+
+type Mutation {
+  publish(latitude: Float!, longitude: Float!, tripId: String!): Location
+}
+
+type Query {
+  getLocation: Location
+}
+
+type Subscription {
+  subscribe(tripId: String!): Location @aws_subscribe(mutations : ["publish"])
+}
